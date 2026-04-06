@@ -1,0 +1,94 @@
+name: Build & Deploy Frontend
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ap-south-1
+  ECR_REPOSITORY: finwise-frontend
+  DOCKER_NETWORK: finwise-net
+  CONTAINER_NAME: finwise-frontend
+  SECRET_ID: finwise/frontend
+
+jobs:
+  build-and-deploy:
+    name: Build → ECR → Deploy EC2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Authenticate to AWS via OIDC ──
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-deploy
+          aws-region: ${{ env.AWS_REGION }}
+
+      # ── Login to ECR ──
+      - name: Login to Amazon ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # ── Build & Push Docker image ──
+      - name: Build and push Docker image
+        run: |
+          IMAGE="${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}"
+          docker build -t $IMAGE:${{ github.sha }} -t $IMAGE:latest .
+          docker push $IMAGE:${{ github.sha }}
+          docker push $IMAGE:latest
+          echo "Pushed: $IMAGE:${{ github.sha }}"
+
+      # ── Deploy to EC2 ──
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          envs: AWS_REGION,ECR_REPOSITORY,DOCKER_NETWORK,CONTAINER_NAME,SECRET_ID
+          script: |
+            set -e
+            ECR_REGISTRY="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+            IMAGE="${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
+
+            # Login to ECR
+            aws ecr get-login-password --region ${AWS_REGION} | \
+              docker login --username AWS --password-stdin ${ECR_REGISTRY}
+
+            # Pull latest image
+            docker pull ${IMAGE}
+
+            # Fetch env from Secrets Manager → .env file (for BACKEND_URL override if needed)
+            aws secretsmanager get-secret-value \
+              --secret-id ${SECRET_ID} \
+              --region ${AWS_REGION} \
+              --query SecretString --output text | \
+              python3 -c "import json,sys; [print(f'{k}={v}') for k,v in json.load(sys.stdin).items()]" \
+              > /home/ec2-user/apps/${CONTAINER_NAME}.env
+
+            # Source env file to get BACKEND_URL if set
+            BACKEND_URL=$(grep '^BACKEND_URL=' /home/ec2-user/apps/${CONTAINER_NAME}.env | cut -d= -f2- || echo "")
+
+            # Create network if not exists
+            docker network create ${DOCKER_NETWORK} 2>/dev/null || true
+
+            # Stop old container
+            docker rm -f ${CONTAINER_NAME} 2>/dev/null || true
+
+            # Run new container
+            docker run -d \
+              --name ${CONTAINER_NAME} \
+              --network ${DOCKER_NETWORK} \
+              -p 4100:4100 \
+              ${BACKEND_URL:+-e BACKEND_URL=$BACKEND_URL} \
+              --restart unless-stopped \
+              ${IMAGE}
+
+            # Cleanup old images
+            docker image prune -f
+            echo "Deployed ${CONTAINER_NAME}: ${{ github.sha }}"
