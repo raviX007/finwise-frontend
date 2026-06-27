@@ -274,3 +274,4 @@ See [docs/deployment.md](docs/deployment.md) for full setup instructions.
 - **Tailwind v4** — Utility-first CSS with no component library dependency. Keeps the bundle small (22KB gzipped CSS) and the design fully custom.
 - **Optimistic UI updates** — User messages appear instantly in the chat before the API confirms. Goal creates/updates reflect immediately in the UI.
 - **No recharts/chart library** — Dashboard uses simple stat cards and text breakdowns. Charts would add bundle weight for minimal value at this stage.
+db changed
