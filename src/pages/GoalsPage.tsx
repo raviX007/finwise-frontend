@@ -19,7 +19,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   HOME: "bg-amber-50 text-amber-700",
   EMERGENCY: "bg-red-50 text-red-700",
   TRAVEL: "bg-teal-50 text-teal-700",
-  INVESTMENT: "bg-emerald-50 text-emerald-700",
+  INVESTMENT: "bg-primary-50 text-primary-700",
   OTHER: "bg-gray-50 text-gray-700",
 };
 
@@ -122,7 +122,7 @@ export default function GoalsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="animate-spin w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full" />
+        <div className="animate-spin w-8 h-8 border-2 border-primary-600 border-t-transparent rounded-full" />
       </div>
     );
   }
@@ -141,7 +141,7 @@ export default function GoalsPage() {
             resetForm();
             setShowForm(true);
           }}
-          className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
         >
           <Plus size={16} />
           Add Goal
@@ -177,7 +177,7 @@ export default function GoalsPage() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required
-                  className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm"
+                  className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
                   placeholder="e.g., Buy a house in Bangalore"
                 />
               </div>
@@ -193,7 +193,7 @@ export default function GoalsPage() {
                     onChange={(e) => setTargetAmount(e.target.value)}
                     required
                     min="1"
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm"
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
                     placeholder="50,00,000"
                   />
                 </div>
@@ -206,7 +206,7 @@ export default function GoalsPage() {
                     value={currentAmount}
                     onChange={(e) => setCurrentAmount(e.target.value)}
                     min="0"
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm"
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
                     placeholder="0"
                   />
                 </div>
@@ -220,7 +220,7 @@ export default function GoalsPage() {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm"
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
                   >
                     {CATEGORIES.map((c) => (
                       <option key={c} value={c}>
@@ -237,7 +237,7 @@ export default function GoalsPage() {
                     type="date"
                     value={deadline}
                     onChange={(e) => setDeadline(e.target.value)}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm"
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
                   />
                 </div>
               </div>
@@ -245,7 +245,7 @@ export default function GoalsPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-2.5 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-colors"
+                className="w-full py-2.5 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors"
               >
                 {submitting
                   ? "Saving..."
@@ -270,7 +270,7 @@ export default function GoalsPage() {
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+            className="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
           >
             Create Goal
           </button>
@@ -305,7 +305,7 @@ export default function GoalsPage() {
                   <div className="flex gap-1">
                     <button
                       onClick={() => openEdit(goal)}
-                      className="p-1.5 text-gray-400 hover:text-emerald-600 transition-colors"
+                      className="p-1.5 text-gray-400 hover:text-primary-600 transition-colors"
                     >
                       <Pencil size={14} />
                     </button>
@@ -329,7 +329,7 @@ export default function GoalsPage() {
                   </div>
                   <div className="w-full bg-gray-100 rounded-full h-2">
                     <div
-                      className="bg-emerald-500 h-2 rounded-full transition-all"
+                      className="bg-primary-500 h-2 rounded-full transition-all"
                       style={{ width: `${progress}%` }}
                     />
                   </div>

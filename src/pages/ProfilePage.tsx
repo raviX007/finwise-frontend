@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/auth-context";
 import { auth as authApi } from "../lib/api";
 
 const RISK_OPTIONS = [
@@ -59,7 +59,7 @@ export default function ProfilePage() {
       </p>
 
       {success && (
-        <div className="mb-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm rounded-lg">
+        <div className="mb-4 p-3 bg-primary-50 border border-primary-200 text-primary-700 text-sm rounded-lg">
           Profile updated successfully
         </div>
       )}
@@ -85,7 +85,7 @@ export default function ProfilePage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm"
+                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
               />
             </div>
 
@@ -117,7 +117,7 @@ export default function ProfilePage() {
                 key={opt.value}
                 className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${
                   riskAppetite === opt.value
-                    ? "border-emerald-500 bg-emerald-50"
+                    ? "border-primary-500 bg-primary-50"
                     : "border-gray-200 hover:bg-gray-50"
                 }`}
               >
@@ -127,7 +127,7 @@ export default function ProfilePage() {
                   value={opt.value}
                   checked={riskAppetite === opt.value}
                   onChange={(e) => setRiskAppetite(e.target.value as "CONSERVATIVE" | "MODERATE" | "AGGRESSIVE")}
-                  className="mt-0.5 accent-emerald-600"
+                  className="mt-0.5 accent-primary-600"
                 />
                 <div>
                   <p className="text-sm font-medium text-gray-900">
@@ -161,7 +161,7 @@ export default function ProfilePage() {
         <button
           type="submit"
           disabled={saving}
-          className="w-full py-2.5 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-colors"
+          className="w-full py-2.5 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors"
         >
           {saving ? "Saving..." : "Save Changes"}
         </button>
