@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/auth-context";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -28,31 +28,31 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex">
       {/* Left panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-600 to-teal-700 p-12 flex-col justify-between">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary-700 to-primary-900 p-12 flex-col justify-between">
         <div>
           <h1 className="text-3xl font-bold text-white">FinWise AI</h1>
-          <p className="text-emerald-100 mt-2">Smart Financial Advisor</p>
+          <p className="text-primary-100 mt-2">Smart Financial Advisor</p>
         </div>
         <div>
           <h2 className="text-2xl font-semibold text-white mb-4">
             Start your financial journey today
           </h2>
-          <ul className="space-y-3 text-emerald-100 text-sm">
+          <ul className="space-y-3 text-primary-100 text-sm">
             <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-emerald-300 rounded-full" />
+              <span className="w-1.5 h-1.5 bg-primary-300 rounded-full" />
               AI-powered investment guidance for Indian markets
             </li>
             <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-emerald-300 rounded-full" />
+              <span className="w-1.5 h-1.5 bg-primary-300 rounded-full" />
               Track savings goals — retirement, education, home
             </li>
             <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-emerald-300 rounded-full" />
+              <span className="w-1.5 h-1.5 bg-primary-300 rounded-full" />
               Personalized advice based on your risk appetite
             </li>
           </ul>
         </div>
-        <p className="text-emerald-200 text-xs">
+        <p className="text-primary-200 text-xs">
           &copy; 2026 FinWise AI. Educational purposes only.
         </p>
       </div>
@@ -61,7 +61,7 @@ export default function RegisterPage() {
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="lg:hidden mb-8">
-            <h1 className="text-2xl font-bold text-emerald-600">FinWise AI</h1>
+            <h1 className="text-2xl font-bold text-primary-600">FinWise AI</h1>
           </div>
 
           <h2 className="text-2xl font-bold text-gray-900">Create account</h2>
@@ -85,7 +85,7 @@ export default function RegisterPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors"
+                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors"
                 placeholder="Ravi Kumar"
               />
             </div>
@@ -98,7 +98,7 @@ export default function RegisterPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors"
+                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors"
                 placeholder="you@example.com"
               />
             </div>
@@ -112,14 +112,14 @@ export default function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors"
+                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors"
                 placeholder="At least 6 characters"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-colors"
+              className="w-full py-2.5 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors"
             >
               {loading ? "Creating account..." : "Create Account"}
             </button>
@@ -129,7 +129,7 @@ export default function RegisterPage() {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-emerald-600 font-medium hover:underline"
+              className="text-primary-600 font-medium hover:underline"
             >
               Sign in
             </Link>

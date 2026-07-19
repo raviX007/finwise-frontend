@@ -1,6 +1,29 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Primary theme palette — royal blue (RAJ-6), anchored at primary-600 #4169E1 */
+@theme {
+  --color-primary-50: #eef2fd;
+  --color-primary-100: #dce5fb;
+  --color-primary-200: #bfcff7;
+  --color-primary-300: #97b1f1;
+  --color-primary-400: #6e8fe9;
+  --color-primary-500: #4f74e4;
+  --color-primary-600: #4169e1;
+  --color-primary-700: #3354c4;
+  --color-primary-800: #2c46a0;
+  --color-primary-900: #283e7f;
+  --color-primary-950: #1a2751;
+}
+
+/* Typography plugin only ships prose-<color> modifiers for built-in colors;
+   provide the same link-color vars the old green modifier set, using the
+   primary palette. */
+@utility prose-primary {
+  --tw-prose-links: var(--color-primary-600);
+  --tw-prose-invert-links: var(--color-primary-500);
+}
+
 @layer base {
   body {
     @apply bg-gray-50 text-gray-900 antialiased;

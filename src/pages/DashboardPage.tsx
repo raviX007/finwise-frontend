@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Target, MessageSquare, TrendingUp, CheckCircle } from "lucide-react";
 import { dashboard } from "../lib/api";
 import type { DashboardStats } from "../lib/api";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/auth-context";
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -28,7 +28,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="animate-spin w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full" />
+        <div className="animate-spin w-8 h-8 border-2 border-primary-600 border-t-transparent rounded-full" />
       </div>
     );
   }
@@ -57,7 +57,7 @@ export default function DashboardPage() {
           icon={<Target size={20} />}
           label="Total Goals"
           value={String(stats?.totalGoals || 0)}
-          color="emerald"
+          color="primary"
         />
         <StatCard
           icon={<TrendingUp size={20} />}
@@ -92,7 +92,7 @@ export default function DashboardPage() {
                   <span className="text-sm text-gray-600 capitalize">
                     {cat.toLowerCase()}
                   </span>
-                  <span className="text-sm font-medium bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full">
+                  <span className="text-sm font-medium bg-primary-50 text-primary-700 px-2.5 py-0.5 rounded-full">
                     {count}
                   </span>
                 </div>
@@ -103,7 +103,7 @@ export default function DashboardPage() {
               No goals yet.{" "}
               <button
                 onClick={() => navigate("/goals")}
-                className="text-emerald-600 hover:underline"
+                className="text-primary-600 hover:underline"
               >
                 Create your first goal
               </button>
@@ -144,7 +144,7 @@ export default function DashboardPage() {
               No conversations yet.{" "}
               <button
                 onClick={() => navigate("/chat")}
-                className="text-emerald-600 hover:underline"
+                className="text-primary-600 hover:underline"
               >
                 Start chatting with AI
               </button>
@@ -168,7 +168,7 @@ function StatCard({
   color: string;
 }) {
   const colors: Record<string, string> = {
-    emerald: "bg-emerald-50 text-emerald-600",
+    primary: "bg-primary-50 text-primary-600",
     blue: "bg-blue-50 text-blue-600",
     purple: "bg-purple-50 text-purple-600",
     amber: "bg-amber-50 text-amber-600",

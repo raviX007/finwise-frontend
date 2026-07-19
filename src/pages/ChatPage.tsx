@@ -140,7 +140,7 @@ export default function ChatPage() {
         <div className="p-4 border-b border-gray-200">
           <button
             onClick={createSession}
-            className="w-full flex items-center justify-center gap-2 py-2.5 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+            className="w-full flex items-center justify-center gap-2 py-2.5 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
           >
             <Plus size={16} />
             New Chat
@@ -162,7 +162,7 @@ export default function ChatPage() {
                 key={session.id}
                 className={`group flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer mb-1 ${
                   activeSession === session.id
-                    ? "bg-emerald-50 text-emerald-700"
+                    ? "bg-primary-50 text-primary-700"
                     : "text-gray-600 hover:bg-gray-50"
                 }`}
                 onClick={() => setActiveSession(session.id)}
@@ -199,7 +199,7 @@ export default function ChatPage() {
               </p>
               <button
                 onClick={createSession}
-                className="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+                className="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
               >
                 Start a Conversation
               </button>
@@ -226,7 +226,7 @@ export default function ChatPage() {
                         onClick={() => {
                           setInput(q);
                         }}
-                        className="px-3 py-1.5 bg-gray-100 text-gray-600 text-xs rounded-full hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
+                        className="px-3 py-1.5 bg-gray-100 text-gray-600 text-xs rounded-full hover:bg-primary-50 hover:text-primary-700 transition-colors"
                       >
                         {q}
                       </button>
@@ -241,13 +241,13 @@ export default function ChatPage() {
 
               {streaming && streamingText && (
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-medium text-xs shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-medium text-xs shrink-0">
                     AI
                   </div>
                   <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 max-w-2xl">
-                    <div className="text-sm text-gray-800 prose prose-sm prose-emerald max-w-none">
+                    <div className="text-sm text-gray-800 prose prose-sm prose-primary max-w-none">
                       <Markdown remarkPlugins={[remarkGfm]}>{streamingText}</Markdown>
-                      <span className="inline-block w-1.5 h-4 bg-emerald-500 animate-pulse ml-0.5" />
+                      <span className="inline-block w-1.5 h-4 bg-primary-500 animate-pulse ml-0.5" />
                     </div>
                   </div>
                 </div>
@@ -265,13 +265,13 @@ export default function ChatPage() {
                   onKeyDown={handleKeyDown}
                   placeholder="Ask about investments, savings, tax planning..."
                   rows={1}
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm"
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
                   style={{ maxHeight: 120 }}
                 />
                 <button
                   onClick={sendMessage}
                   disabled={!input.trim() || streaming}
-                  className="p-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {streaming ? (
                     <Loader2 size={18} className="animate-spin" />
@@ -300,7 +300,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium shrink-0 ${
           isUser
             ? "bg-blue-100 text-blue-700"
-            : "bg-emerald-100 text-emerald-700"
+            : "bg-primary-100 text-primary-700"
         }`}
       >
         {isUser ? "You" : "AI"}
@@ -315,7 +315,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         {isUser ? (
           <p className="text-sm whitespace-pre-wrap">{message.content}</p>
         ) : (
-          <div className="text-sm prose prose-sm prose-emerald max-w-none">
+          <div className="text-sm prose prose-sm prose-primary max-w-none">
             <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
           </div>
         )}
